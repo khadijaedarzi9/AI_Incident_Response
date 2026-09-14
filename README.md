@@ -1,4 +1,5 @@
-# Project Ballistic
+# AI Incident Response
+
 
 ## BCP-1: proof-carrying containment for guardrails-off evaluations
 
