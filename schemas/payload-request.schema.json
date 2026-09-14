@@ -1,0 +1,21 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "additionalProperties": true,
+      "title": "Action",
+      "type": "object"
+    },
+    "action_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Action Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "action",
+    "action_sha256"
+  ],
+  "title": "RequestEventPayload",
+  "type": "object"
+}

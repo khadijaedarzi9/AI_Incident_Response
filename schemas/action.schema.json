@@ -1,0 +1,105 @@
+{
+  "$defs": {
+    "HttpMethod": {
+      "enum": [
+        "DELETE",
+        "GET",
+        "HEAD",
+        "PATCH",
+        "POST",
+        "PUT"
+      ],
+      "title": "HttpMethod",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "The sole action shape accepted by the trusted executor.",
+  "properties": {
+    "body_bytes": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Body Bytes",
+      "type": "integer"
+    },
+    "body_canonical_json": {
+      "title": "Body Canonical Json",
+      "type": "string"
+    },
+    "body_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Body Sha256",
+      "type": "string"
+    },
+    "credential_id": {
+      "anyOf": [
+        {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Credential Id"
+    },
+    "host": {
+      "minLength": 1,
+      "title": "Host",
+      "type": "string"
+    },
+    "method": {
+      "$ref": "#/$defs/HttpMethod"
+    },
+    "path": {
+      "title": "Path",
+      "type": "string"
+    },
+    "port": {
+      "maximum": 65535,
+      "minimum": 1,
+      "title": "Port",
+      "type": "integer"
+    },
+    "redirects": {
+      "const": false,
+      "default": false,
+      "title": "Redirects",
+      "type": "boolean"
+    },
+    "request_id": {
+      "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "resolved_ip": {
+      "title": "Resolved Ip",
+      "type": "string"
+    },
+    "scheme": {
+      "const": "https",
+      "default": "https",
+      "title": "Scheme",
+      "type": "string"
+    },
+    "tls_spki_sha256": {
+      "title": "Tls Spki Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "request_id",
+    "method",
+    "host",
+    "port",
+    "path",
+    "resolved_ip",
+    "tls_spki_sha256",
+    "body_canonical_json",
+    "body_sha256",
+    "body_bytes"
+  ],
+  "title": "Action",
+  "type": "object"
+}

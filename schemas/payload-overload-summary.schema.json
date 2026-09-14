@@ -1,0 +1,35 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "first_excess_monotonic_ns": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "First Excess Monotonic Ns",
+      "type": "integer"
+    },
+    "raw_bytes": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Raw Bytes",
+      "type": "integer"
+    },
+    "raw_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Raw Sha256",
+      "type": "string"
+    },
+    "reason_code": {
+      "const": "admission.overload",
+      "title": "Reason Code",
+      "type": "string"
+    }
+  },
+  "required": [
+    "first_excess_monotonic_ns",
+    "raw_bytes",
+    "raw_sha256",
+    "reason_code"
+  ],
+  "title": "OverloadSummaryPayload",
+  "type": "object"
+}

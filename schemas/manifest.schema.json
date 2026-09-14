@@ -1,0 +1,576 @@
+{
+  "$defs": {
+    "CredentialGrant": {
+      "additionalProperties": false,
+      "description": "A capability reference. Secret material is never part of a manifest.",
+      "properties": {
+        "allowed_rule_ids": {
+          "items": {
+            "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Allowed Rule Ids",
+          "type": "array"
+        },
+        "audience": {
+          "title": "Audience",
+          "type": "string"
+        },
+        "broker_ref": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Broker Ref",
+          "type": "string"
+        },
+        "credential_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Credential Id",
+          "type": "string"
+        },
+        "expires_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "is_canary": {
+          "default": false,
+          "title": "Is Canary",
+          "type": "boolean"
+        },
+        "max_uses": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Uses",
+          "type": "integer"
+        },
+        "scopes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Scopes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "credential_id",
+        "broker_ref",
+        "audience",
+        "allowed_rule_ids",
+        "expires_at",
+        "max_uses"
+      ],
+      "title": "CredentialGrant",
+      "type": "object"
+    },
+    "Ed25519PublicKey": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519",
+          "default": "Ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key_id",
+        "value"
+      ],
+      "title": "Ed25519PublicKey",
+      "type": "object"
+    },
+    "Ed25519Signature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519",
+          "default": "Ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key_id",
+        "value"
+      ],
+      "title": "Ed25519Signature",
+      "type": "object"
+    },
+    "EgressRule": {
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "title": "Host",
+          "type": "string"
+        },
+        "max_request_bytes": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Request Bytes",
+          "type": "integer"
+        },
+        "max_requests": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Requests",
+          "type": "integer"
+        },
+        "max_response_bytes": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Response Bytes",
+          "type": "integer"
+        },
+        "methods": {
+          "items": {
+            "$ref": "#/$defs/HttpMethod"
+          },
+          "minItems": 1,
+          "title": "Methods",
+          "type": "array"
+        },
+        "path_prefixes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Path Prefixes",
+          "type": "array"
+        },
+        "port": {
+          "maximum": 65535,
+          "minimum": 1,
+          "title": "Port",
+          "type": "integer"
+        },
+        "resolved_ip_cidrs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Resolved Ip Cidrs",
+          "type": "array"
+        },
+        "rule_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "scheme": {
+          "const": "https",
+          "default": "https",
+          "title": "Scheme",
+          "type": "string"
+        },
+        "tls_spki_sha256": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Tls Spki Sha256",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rule_id",
+        "host",
+        "port",
+        "methods",
+        "path_prefixes",
+        "resolved_ip_cidrs",
+        "max_requests",
+        "max_request_bytes",
+        "max_response_bytes"
+      ],
+      "title": "EgressRule",
+      "type": "object"
+    },
+    "HttpMethod": {
+      "enum": [
+        "DELETE",
+        "GET",
+        "HEAD",
+        "PATCH",
+        "POST",
+        "PUT"
+      ],
+      "title": "HttpMethod",
+      "type": "string"
+    },
+    "KillCriteria": {
+      "additionalProperties": false,
+      "properties": {
+        "deny_is_kill": {
+          "const": true,
+          "default": true,
+          "title": "Deny Is Kill",
+          "type": "boolean"
+        },
+        "max_admitted_requests": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Admitted Requests",
+          "type": "integer"
+        },
+        "max_event_payload_bytes": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Event Payload Bytes",
+          "type": "integer"
+        },
+        "max_inflight_requests": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Inflight Requests",
+          "type": "integer"
+        },
+        "max_queued_events": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Queued Events",
+          "type": "integer"
+        },
+        "max_requests_per_window": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Requests Per Window",
+          "type": "integer"
+        },
+        "max_runtime_ms": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Runtime Ms",
+          "type": "integer"
+        },
+        "max_total_egress_bytes": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Total Egress Bytes",
+          "type": "integer"
+        },
+        "max_total_events": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Max Total Events",
+          "type": "integer"
+        },
+        "rate_window_ms": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Rate Window Ms",
+          "type": "integer"
+        },
+        "supervisor_kill_latency_sla_ms": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Supervisor Kill Latency Sla Ms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "max_runtime_ms",
+        "max_total_events",
+        "max_admitted_requests",
+        "max_inflight_requests",
+        "max_requests_per_window",
+        "rate_window_ms",
+        "max_queued_events",
+        "max_event_payload_bytes",
+        "max_total_egress_bytes",
+        "supervisor_kill_latency_sla_ms"
+      ],
+      "title": "KillCriteria",
+      "type": "object"
+    },
+    "ManifestBody": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_egress": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EgressRule"
+          },
+          "title": "Allowed Egress",
+          "type": "array"
+        },
+        "credentials": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CredentialGrant"
+          },
+          "title": "Credentials",
+          "type": "array"
+        },
+        "expires_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "gateway_key": {
+          "$ref": "#/$defs/Ed25519PublicKey"
+        },
+        "issued_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "kill_criteria": {
+          "$ref": "#/$defs/KillCriteria"
+        },
+        "manifest_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Manifest Id",
+          "type": "string"
+        },
+        "not_before": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Not Before",
+          "type": "string"
+        },
+        "operator_key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Operator Key Id",
+          "type": "string"
+        },
+        "protocol": {
+          "const": "BCP-1",
+          "default": "BCP-1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "run_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "second_hops": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/SecondHopAttestation"
+          },
+          "title": "Second Hops",
+          "type": "array"
+        },
+        "supervisor_key": {
+          "$ref": "#/$defs/Ed25519PublicKey"
+        },
+        "witness_key": {
+          "$ref": "#/$defs/Ed25519PublicKey"
+        }
+      },
+      "required": [
+        "manifest_id",
+        "run_id",
+        "issued_at",
+        "not_before",
+        "expires_at",
+        "operator_key_id",
+        "gateway_key",
+        "supervisor_key",
+        "witness_key",
+        "kill_criteria"
+      ],
+      "title": "ManifestBody",
+      "type": "object"
+    },
+    "SecondHopAttestation": {
+      "additionalProperties": false,
+      "description": "Provider-signed preflight envelope pinned into the operator manifest.",
+      "properties": {
+        "attestation_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Attestation Hash",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/SecondHopAttestationBody"
+        },
+        "provider_key": {
+          "$ref": "#/$defs/Ed25519PublicKey"
+        },
+        "provider_signature": {
+          "$ref": "#/$defs/Ed25519Signature"
+        }
+      },
+      "required": [
+        "body",
+        "provider_key",
+        "attestation_hash",
+        "provider_signature"
+      ],
+      "title": "SecondHopAttestation",
+      "type": "object"
+    },
+    "SecondHopAttestationBody": {
+      "additionalProperties": false,
+      "description": "Provider assertions plus immutable external evidence references.",
+      "properties": {
+        "abuse_monitoring": {
+          "const": true,
+          "title": "Abuse Monitoring",
+          "type": "boolean"
+        },
+        "accountable_org": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Accountable Org",
+          "type": "string"
+        },
+        "authenticated": {
+          "const": true,
+          "title": "Authenticated",
+          "type": "boolean"
+        },
+        "automatic_containment_authorized": {
+          "const": true,
+          "title": "Automatic Containment Authorized",
+          "type": "boolean"
+        },
+        "bounded_requests": {
+          "const": true,
+          "title": "Bounded Requests",
+          "type": "boolean"
+        },
+        "default_deny_egress": {
+          "const": true,
+          "title": "Default Deny Egress",
+          "type": "boolean"
+        },
+        "endpoint_host": {
+          "title": "Endpoint Host",
+          "type": "string"
+        },
+        "evidence_exchange_required": {
+          "const": true,
+          "title": "Evidence Exchange Required",
+          "type": "boolean"
+        },
+        "evidence_sha256": {
+          "items": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "title": "Evidence Sha256",
+          "type": "array"
+        },
+        "expires_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "issued_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "no_ambient_secrets": {
+          "const": true,
+          "title": "No Ambient Secrets",
+          "type": "boolean"
+        },
+        "non_root_workload": {
+          "const": true,
+          "title": "Non Root Workload",
+          "type": "boolean"
+        },
+        "provider_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "provider_key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Provider Key Id",
+          "type": "string"
+        },
+        "responsible_operator": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Responsible Operator",
+          "type": "string"
+        },
+        "run_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "security_contact": {
+          "title": "Security Contact",
+          "type": "string"
+        },
+        "tenant_isolation": {
+          "const": true,
+          "title": "Tenant Isolation",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "run_id",
+        "provider_id",
+        "provider_key_id",
+        "endpoint_host",
+        "accountable_org",
+        "responsible_operator",
+        "security_contact",
+        "issued_at",
+        "expires_at",
+        "evidence_sha256",
+        "authenticated",
+        "non_root_workload",
+        "tenant_isolation",
+        "default_deny_egress",
+        "no_ambient_secrets",
+        "bounded_requests",
+        "abuse_monitoring",
+        "automatic_containment_authorized",
+        "evidence_exchange_required"
+      ],
+      "title": "SecondHopAttestationBody",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "body": {
+      "$ref": "#/$defs/ManifestBody"
+    },
+    "manifest_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "operator_signature": {
+      "$ref": "#/$defs/Ed25519Signature"
+    }
+  },
+  "required": [
+    "body",
+    "manifest_hash",
+    "operator_signature"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

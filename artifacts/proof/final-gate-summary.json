@@ -1,0 +1,18 @@
+{
+  "auditability_claims_access_log": 0,
+  "auditability_claims_bcp1": 5,
+  "auditability_claims_signed_line_log": 1,
+  "baseline_ablation_failures": 5,
+  "bcp1_ablation_failures": 0,
+  "coverage_percent": "80",
+  "docker_network_probes_passed": 2,
+  "docker_network_probes_total": 2,
+  "judge_scenarios_passed": 4,
+  "judge_scenarios_total": 4,
+  "schema_version": "bcp1-final-gate-v2",
+  "tests_collected": 32,
+  "tests_failed": 0,
+  "tests_passed": 32,
+  "tests_skipped": 0,
+  "valid": true
+}

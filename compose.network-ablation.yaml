@@ -1,0 +1,45 @@
+services:
+  gateway:
+    build: .
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/status')",
+        ]
+      interval: 1s
+      timeout: 1s
+      retries: 20
+    networks:
+      - closed
+      - open
+
+  closed-probe:
+    build: .
+    command: ["python", "-m", "demo.network_ablation_probe"]
+    environment:
+      EXPECT_PUBLIC_BLOCKED: "true"
+    depends_on:
+      gateway:
+        condition: service_healthy
+    networks:
+      - closed
+
+  open-probe:
+    build: .
+    command: ["python", "-m", "demo.network_ablation_probe"]
+    environment:
+      EXPECT_PUBLIC_BLOCKED: "false"
+    depends_on:
+      gateway:
+        condition: service_healthy
+    networks:
+      - open
+
+networks:
+  closed:
+    internal: true
+  open: {}
+

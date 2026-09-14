@@ -1,0 +1,207 @@
+{
+  "$defs": {
+    "Ed25519PublicKey": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519",
+          "default": "Ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key_id",
+        "value"
+      ],
+      "title": "Ed25519PublicKey",
+      "type": "object"
+    },
+    "Ed25519Signature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519",
+          "default": "Ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key_id",
+        "value"
+      ],
+      "title": "Ed25519Signature",
+      "type": "object"
+    },
+    "SecondHopAttestationBody": {
+      "additionalProperties": false,
+      "description": "Provider assertions plus immutable external evidence references.",
+      "properties": {
+        "abuse_monitoring": {
+          "const": true,
+          "title": "Abuse Monitoring",
+          "type": "boolean"
+        },
+        "accountable_org": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Accountable Org",
+          "type": "string"
+        },
+        "authenticated": {
+          "const": true,
+          "title": "Authenticated",
+          "type": "boolean"
+        },
+        "automatic_containment_authorized": {
+          "const": true,
+          "title": "Automatic Containment Authorized",
+          "type": "boolean"
+        },
+        "bounded_requests": {
+          "const": true,
+          "title": "Bounded Requests",
+          "type": "boolean"
+        },
+        "default_deny_egress": {
+          "const": true,
+          "title": "Default Deny Egress",
+          "type": "boolean"
+        },
+        "endpoint_host": {
+          "title": "Endpoint Host",
+          "type": "string"
+        },
+        "evidence_exchange_required": {
+          "const": true,
+          "title": "Evidence Exchange Required",
+          "type": "boolean"
+        },
+        "evidence_sha256": {
+          "items": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "title": "Evidence Sha256",
+          "type": "array"
+        },
+        "expires_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "issued_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "no_ambient_secrets": {
+          "const": true,
+          "title": "No Ambient Secrets",
+          "type": "boolean"
+        },
+        "non_root_workload": {
+          "const": true,
+          "title": "Non Root Workload",
+          "type": "boolean"
+        },
+        "provider_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "provider_key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Provider Key Id",
+          "type": "string"
+        },
+        "responsible_operator": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Responsible Operator",
+          "type": "string"
+        },
+        "run_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "security_contact": {
+          "title": "Security Contact",
+          "type": "string"
+        },
+        "tenant_isolation": {
+          "const": true,
+          "title": "Tenant Isolation",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "run_id",
+        "provider_id",
+        "provider_key_id",
+        "endpoint_host",
+        "accountable_org",
+        "responsible_operator",
+        "security_contact",
+        "issued_at",
+        "expires_at",
+        "evidence_sha256",
+        "authenticated",
+        "non_root_workload",
+        "tenant_isolation",
+        "default_deny_egress",
+        "no_ambient_secrets",
+        "bounded_requests",
+        "abuse_monitoring",
+        "automatic_containment_authorized",
+        "evidence_exchange_required"
+      ],
+      "title": "SecondHopAttestationBody",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Provider-signed preflight envelope pinned into the operator manifest.",
+  "properties": {
+    "attestation_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Attestation Hash",
+      "type": "string"
+    },
+    "body": {
+      "$ref": "#/$defs/SecondHopAttestationBody"
+    },
+    "provider_key": {
+      "$ref": "#/$defs/Ed25519PublicKey"
+    },
+    "provider_signature": {
+      "$ref": "#/$defs/Ed25519Signature"
+    }
+  },
+  "required": [
+    "body",
+    "provider_key",
+    "attestation_hash",
+    "provider_signature"
+  ],
+  "title": "SecondHopAttestation",
+  "type": "object"
+}

@@ -1,0 +1,54 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "action_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Action Sha256",
+      "type": "string"
+    },
+    "authorization_id": {
+      "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+      "title": "Authorization Id",
+      "type": "string"
+    },
+    "decision_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Decision Hash",
+      "type": "string"
+    },
+    "kill_epoch": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Kill Epoch",
+      "type": "integer"
+    },
+    "response_bytes": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Response Bytes",
+      "type": "integer"
+    },
+    "response_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Response Sha256",
+      "type": "string"
+    },
+    "status_code": {
+      "maximum": 599,
+      "minimum": 100,
+      "title": "Status Code",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "action_sha256",
+    "authorization_id",
+    "decision_hash",
+    "kill_epoch",
+    "response_bytes",
+    "response_sha256",
+    "status_code"
+  ],
+  "title": "ResultEventPayload",
+  "type": "object"
+}

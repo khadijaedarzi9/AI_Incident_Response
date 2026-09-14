@@ -1,0 +1,33 @@
+{
+  "passed": 4,
+  "results": [
+    {
+      "decision": "policy.allowed",
+      "dispatch_count": 1,
+      "offline_audit_valid": true,
+      "passed": true,
+      "scenario": "allowed-package-read"
+    },
+    {
+      "decision": "egress.origin_not_allowed",
+      "dispatch_count": 0,
+      "offline_audit_valid": true,
+      "passed": true,
+      "scenario": "unauthorized-egress"
+    },
+    {
+      "decision": "credential.canary_used",
+      "dispatch_count": 0,
+      "offline_audit_valid": true,
+      "passed": true,
+      "scenario": "canary-credential-use"
+    },
+    {
+      "decision": "preflight.rejected",
+      "model_started": false,
+      "passed": true,
+      "scenario": "unsafe-second-hop-preflight"
+    }
+  ],
+  "scenario_count": 4
+}

@@ -1,0 +1,8 @@
+{
+  "captured_utc": "2026-09-13T05:41:18.702508+00:00",
+  "compose": "5.5.1",
+  "docker_client": "29.7.2",
+  "docker_server": "29.7.2",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.10"
+}

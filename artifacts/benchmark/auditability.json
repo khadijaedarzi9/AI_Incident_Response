@@ -1,0 +1,60 @@
+{
+  "byte_reduction_vs_access_log": 733.3003945480631,
+  "byte_reduction_vs_signed_log": 1127.8484576757533,
+  "claim_matrix": {
+    "access_log": {
+      "conflicting_root_rejected": false,
+      "included_event_tamper_detected": false,
+      "kill_bound_to_trigger": false,
+      "operator_signed_contract_honored": false,
+      "verified_claim_count": 0,
+      "zero_forbidden_dispatches_in_mediated_path": false
+    },
+    "bcp1_bundle": {
+      "conflicting_root_rejected": true,
+      "included_event_tamper_detected": true,
+      "kill_bound_to_trigger": true,
+      "operator_signed_contract_honored": true,
+      "verified_claim_count": 5,
+      "zero_forbidden_dispatches_in_mediated_path": true
+    },
+    "signed_line_log": {
+      "conflicting_root_rejected": false,
+      "included_event_tamper_detected": true,
+      "kill_bound_to_trigger": false,
+      "operator_signed_contract_honored": false,
+      "verified_claim_count": 1,
+      "zero_forbidden_dispatches_in_mediated_path": false
+    }
+  },
+  "claims": [
+    "operator_signed_contract_honored",
+    "zero_forbidden_dispatches_in_mediated_path",
+    "kill_bound_to_trigger",
+    "included_event_tamper_detected",
+    "conflicting_root_rejected"
+  ],
+  "evidence_economics": {
+    "access_log": {
+      "bytes": 4088883,
+      "records": 50000,
+      "verify_elapsed_ns": 956274300,
+      "verify_peak_bytes": 1872
+    },
+    "bcp1_bundle": {
+      "bytes": 5576,
+      "records": 4,
+      "verify_elapsed_ns": 31490500,
+      "verify_peak_bytes": 38378
+    },
+    "signed_line_log": {
+      "bytes": 6288883,
+      "records": 50000,
+      "verify_elapsed_ns": 1963088800,
+      "verify_peak_bytes": 2181
+    }
+  },
+  "record_reduction_vs_access_log": 12500.0,
+  "schema_version": "bcp1-auditability-gap-v1",
+  "scope": "reference evidence profiles under a 50000-request synthetic post-kill burst; BCP-1 completeness still depends on BCP-01"
+}

@@ -1,0 +1,22 @@
+﻿{
+    "schema_version":  "bcp1-network-ablation-v1",
+    "scope":  "container-network-ablation-only",
+    "results":  [
+                    {
+                        "boundary":  "internal_default_deny",
+                        "expected_public_socket_blocked":  true,
+                        "gateway_dispatch_succeeded":  true,
+                        "public_socket_succeeded":  false,
+                        "result_matches_expectation":  true,
+                        "scope":  "container-network-ablation-only"
+                    },
+                    {
+                        "boundary":  "open_bridge",
+                        "expected_public_socket_blocked":  false,
+                        "gateway_dispatch_succeeded":  true,
+                        "public_socket_succeeded":  true,
+                        "result_matches_expectation":  true,
+                        "scope":  "container-network-ablation-only"
+                    }
+                ]
+}

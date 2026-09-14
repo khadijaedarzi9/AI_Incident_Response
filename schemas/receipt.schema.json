@@ -1,0 +1,538 @@
+{
+  "$defs": {
+    "Ed25519Signature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519",
+          "default": "Ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key_id",
+        "value"
+      ],
+      "title": "Ed25519Signature",
+      "type": "object"
+    },
+    "KillAcknowledgement": {
+      "additionalProperties": false,
+      "properties": {
+        "acknowledgement_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Acknowledgement Hash",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/KillAcknowledgementBody"
+        },
+        "supervisor_signature": {
+          "$ref": "#/$defs/Ed25519Signature"
+        }
+      },
+      "required": [
+        "body",
+        "acknowledgement_hash",
+        "supervisor_signature"
+      ],
+      "title": "KillAcknowledgement",
+      "type": "object"
+    },
+    "KillAcknowledgementBody": {
+      "additionalProperties": false,
+      "properties": {
+        "inflight_at_trigger": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Inflight At Trigger",
+          "type": "integer"
+        },
+        "inflight_cancel_signalled": {
+          "default": 0,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Inflight Cancel Signalled",
+          "type": "integer"
+        },
+        "inflight_cancelled": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Inflight Cancelled",
+          "type": "integer"
+        },
+        "isolation_evidence_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Isolation Evidence Sha256"
+        },
+        "kill_acknowledged_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Kill Acknowledged At",
+          "type": "string"
+        },
+        "kill_acknowledged_monotonic_ns": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Kill Acknowledged Monotonic Ns",
+          "type": "integer"
+        },
+        "kill_latency_ns": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Kill Latency Ns",
+          "type": "integer"
+        },
+        "kill_requested_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Kill Requested At",
+          "type": "string"
+        },
+        "kill_requested_monotonic_ns": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Kill Requested Monotonic Ns",
+          "type": "integer"
+        },
+        "manifest_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Manifest Hash",
+          "type": "string"
+        },
+        "network_isolation_confirmed": {
+          "title": "Network Isolation Confirmed",
+          "type": "boolean"
+        },
+        "protocol": {
+          "const": "BCP-1",
+          "default": "BCP-1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "run_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "supervisor_instance_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Supervisor Instance Id",
+          "type": "string"
+        },
+        "supervisor_key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Supervisor Key Id",
+          "type": "string"
+        },
+        "terminated_workload_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+            "type": "string"
+          },
+          "title": "Terminated Workload Ids",
+          "type": "array"
+        },
+        "termination_mode": {
+          "$ref": "#/$defs/TerminationMode"
+        },
+        "trigger_event_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Trigger Event Hash",
+          "type": "string"
+        },
+        "trigger_event_sequence": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Trigger Event Sequence",
+          "type": "integer"
+        },
+        "trigger_monotonic_ns": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Trigger Monotonic Ns",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "run_id",
+        "manifest_hash",
+        "supervisor_key_id",
+        "supervisor_instance_id",
+        "trigger_event_sequence",
+        "trigger_event_hash",
+        "trigger_monotonic_ns",
+        "kill_requested_at",
+        "kill_requested_monotonic_ns",
+        "kill_acknowledged_at",
+        "kill_acknowledged_monotonic_ns",
+        "kill_latency_ns",
+        "termination_mode",
+        "inflight_at_trigger",
+        "inflight_cancelled",
+        "network_isolation_confirmed"
+      ],
+      "title": "KillAcknowledgementBody",
+      "type": "object"
+    },
+    "ReceiptBody": {
+      "additionalProperties": false,
+      "properties": {
+        "admitted_request_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Admitted Request Count",
+          "type": "integer"
+        },
+        "allowed_request_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Allowed Request Count",
+          "type": "integer"
+        },
+        "completed_request_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Completed Request Count",
+          "type": "integer"
+        },
+        "denied_request_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Denied Request Count",
+          "type": "integer"
+        },
+        "dispatched_request_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Dispatched Request Count",
+          "type": "integer"
+        },
+        "dropped_after_kill_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Dropped After Kill Count",
+          "type": "integer"
+        },
+        "event_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Event Count",
+          "type": "integer"
+        },
+        "evidence_file_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Evidence File Sha256",
+          "type": "string"
+        },
+        "evidence_format": {
+          "const": "canonical-jsonl-v1",
+          "default": "canonical-jsonl-v1",
+          "title": "Evidence Format",
+          "type": "string"
+        },
+        "final_event_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Final Event Hash"
+        },
+        "finished_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "finished_monotonic_ns": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Finished Monotonic Ns",
+          "type": "integer"
+        },
+        "first_event_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "First Event Hash"
+        },
+        "kill_acknowledgement": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/KillAcknowledgement"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "manifest_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Manifest Hash",
+          "type": "string"
+        },
+        "observed_request_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Observed Request Count",
+          "type": "integer"
+        },
+        "protocol": {
+          "const": "BCP-1",
+          "default": "BCP-1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "rejected_overload_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Rejected Overload Count",
+          "type": "integer"
+        },
+        "run_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "started_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Started At",
+          "type": "string"
+        },
+        "started_monotonic_ns": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Started Monotonic Ns",
+          "type": "integer"
+        },
+        "status": {
+          "$ref": "#/$defs/RunStatus"
+        },
+        "supervisor_instance_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Supervisor Instance Id",
+          "type": "string"
+        },
+        "supervisor_key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Supervisor Key Id",
+          "type": "string"
+        },
+        "total_egress_bytes": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Total Egress Bytes",
+          "type": "integer"
+        },
+        "witness_checkpoint": {
+          "$ref": "#/$defs/WitnessCheckpoint"
+        }
+      },
+      "required": [
+        "run_id",
+        "manifest_hash",
+        "supervisor_key_id",
+        "supervisor_instance_id",
+        "status",
+        "started_at",
+        "finished_at",
+        "started_monotonic_ns",
+        "finished_monotonic_ns",
+        "event_count",
+        "first_event_hash",
+        "final_event_hash",
+        "evidence_file_sha256",
+        "observed_request_count",
+        "admitted_request_count",
+        "allowed_request_count",
+        "denied_request_count",
+        "dispatched_request_count",
+        "completed_request_count",
+        "rejected_overload_count",
+        "dropped_after_kill_count",
+        "total_egress_bytes",
+        "witness_checkpoint"
+      ],
+      "title": "ReceiptBody",
+      "type": "object"
+    },
+    "RunStatus": {
+      "enum": [
+        "COMPLETED",
+        "FAILED",
+        "KILLED",
+        "SUPERVISOR_FAILURE"
+      ],
+      "title": "RunStatus",
+      "type": "string"
+    },
+    "TerminationMode": {
+      "enum": [
+        "SIMULATED",
+        "CGROUP_KILL",
+        "JOB_OBJECT_TERMINATE",
+        "MICROVM_DESTROY",
+        "PROCESS_NAMESPACE_KILL"
+      ],
+      "title": "TerminationMode",
+      "type": "string"
+    },
+    "WitnessCheckpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "body": {
+          "$ref": "#/$defs/WitnessCheckpointBody"
+        },
+        "checkpoint_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Checkpoint Hash",
+          "type": "string"
+        },
+        "witness_signature": {
+          "$ref": "#/$defs/Ed25519Signature"
+        }
+      },
+      "required": [
+        "body",
+        "checkpoint_hash",
+        "witness_signature"
+      ],
+      "title": "WitnessCheckpoint",
+      "type": "object"
+    },
+    "WitnessCheckpointBody": {
+      "additionalProperties": false,
+      "description": "Evidence root signed by an independently operated witness.",
+      "properties": {
+        "event_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Event Count",
+          "type": "integer"
+        },
+        "evidence_file_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Evidence File Sha256",
+          "type": "string"
+        },
+        "final_event_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Final Event Hash"
+        },
+        "manifest_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Manifest Hash",
+          "type": "string"
+        },
+        "protocol": {
+          "const": "BCP-1",
+          "default": "BCP-1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "run_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "witness_key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Witness Key Id",
+          "type": "string"
+        },
+        "witnessed_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Witnessed At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "manifest_hash",
+        "witness_key_id",
+        "witnessed_at",
+        "event_count",
+        "final_event_hash",
+        "evidence_file_sha256"
+      ],
+      "title": "WitnessCheckpointBody",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "body": {
+      "$ref": "#/$defs/ReceiptBody"
+    },
+    "receipt_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Receipt Hash",
+      "type": "string"
+    },
+    "supervisor_signature": {
+      "$ref": "#/$defs/Ed25519Signature"
+    }
+  },
+  "required": [
+    "body",
+    "receipt_hash",
+    "supervisor_signature"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

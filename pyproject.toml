@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-ballistic"
+version = "1.0.0"
+description = "BCP-1 proof-carrying containment for guardrails-off AI evaluations"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+  "cryptography==45.0.6",
+  "fastapi==0.116.1",
+  "pydantic==2.11.7",
+  "typing-extensions==4.14.1",
+  "uvicorn==0.35.0",
+]
+
+[project.optional-dependencies]
+test = [
+  "httpx==0.28.1",
+  "pytest==8.4.1",
+  "pytest-cov==6.2.1",
+]
+
+[project.scripts]
+ballistic-audit = "auditor.verify:main"
+ballistic-auditability = "benchmarks.auditability:main"
+ballistic-benchmark = "benchmarks.ablation:main"
+ballistic-demo = "demo.run:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app", "auditor", "benchmarks", "demo"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["app", "auditor"]

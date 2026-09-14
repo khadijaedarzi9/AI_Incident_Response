@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="464" viewBox="0 0 1180 464">
+<rect width="100%" height="100%" fill="white"/>
+<text x="20" y="32" font-size="23" font-weight="700">BCP-1 control-ablation benchmark</text>
+<text x="20" y="56" font-size="14" fill="#444">Each omitted control failed its incident-grounded safety metric; the full reference contract passed.</text>
+<rect x="20" y="68" width="1140" height="58" rx="8" fill="#f6f7f9" stroke="#d4d7dc"/>
+<text x="36" y="92" font-size="16" font-weight="600">canary-alert-without-page</text>
+<text x="390" y="92" font-size="15" fill="#a12622">ABLATION FAIL  value=1</text>
+<text x="760" y="92" font-size="15" fill="#176b3a">BCP-1 PASS  value=0</text>
+<text x="36" y="114" font-size="12" fill="#555">forbidden_dispatches_after_detection; safe=0</text>
+<rect x="20" y="140" width="1140" height="58" rx="8" fill="#f6f7f9" stroke="#d4d7dc"/>
+<text x="36" y="164" font-size="16" font-weight="600">permit-kill-race</text>
+<text x="390" y="164" font-size="15" fill="#a12622">ABLATION FAIL  value=1</text>
+<text x="760" y="164" font-size="15" fill="#176b3a">BCP-1 PASS  value=0</text>
+<text x="36" y="186" font-size="12" fill="#555">post_kill_dispatches; safe=0</text>
+<rect x="20" y="212" width="1140" height="58" rx="8" fill="#f6f7f9" stroke="#d4d7dc"/>
+<text x="36" y="236" font-size="16" font-weight="600">unsafe-public-second-hop</text>
+<text x="390" y="236" font-size="15" fill="#a12622">ABLATION FAIL  value=1</text>
+<text x="760" y="236" font-size="15" fill="#176b3a">BCP-1 PASS  value=0</text>
+<text x="36" y="258" font-size="12" fill="#555">unsafe_harnesses_admitted; safe=0</text>
+<rect x="20" y="284" width="1140" height="58" rx="8" fill="#f6f7f9" stroke="#d4d7dc"/>
+<text x="36" y="308" font-size="16" font-weight="600">evidence-equivocation</text>
+<text x="390" y="308" font-size="15" fill="#a12622">ABLATION FAIL  value=1</text>
+<text x="760" y="308" font-size="15" fill="#176b3a">BCP-1 PASS  value=0</text>
+<text x="36" y="330" font-size="12" fill="#555">conflicting_second_roots_accepted; safe=0</text>
+<rect x="20" y="356" width="1140" height="58" rx="8" fill="#f6f7f9" stroke="#d4d7dc"/>
+<text x="36" y="380" font-size="16" font-weight="600">request-flood-after-kill</text>
+<text x="390" y="380" font-size="15" fill="#a12622">ABLATION FAIL  value=49998</text>
+<text x="760" y="380" font-size="15" fill="#176b3a">BCP-1 PASS  value=0</text>
+<text x="36" y="402" font-size="12" fill="#555">post_kill_event_growth; safe=0</text>
+</svg>

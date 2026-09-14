@@ -1,0 +1,34 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "action_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Action Sha256",
+      "type": "string"
+    },
+    "authorization_id": {
+      "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+      "title": "Authorization Id",
+      "type": "string"
+    },
+    "decision_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Decision Hash",
+      "type": "string"
+    },
+    "kill_epoch": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Kill Epoch",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "action_sha256",
+    "authorization_id",
+    "decision_hash",
+    "kill_epoch"
+  ],
+  "title": "DispatchEventPayload",
+  "type": "object"
+}

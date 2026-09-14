@@ -1,0 +1,102 @@
+[
+  {
+    "path": "artifacts/benchmark/ablation-results.svg",
+    "sha256": "1c47dec69a12108425a6db5be909652d5655ecb6d1b4f46db6f0e9e810f22b95"
+  },
+  {
+    "path": "artifacts/benchmark/auditability.json",
+    "sha256": "aab4f4295750b2e25e04e09d5e6d1c062fd8c88fd170dc906d0afd0252ef016e"
+  },
+  {
+    "path": "artifacts/benchmark/network-results.json",
+    "sha256": "f698c07732a74a3940b2316e8939cfd326b676a90e4e7f96d8ad35ce997da618"
+  },
+  {
+    "path": "artifacts/benchmark/results.json",
+    "sha256": "cbaf2fdaf17eca620cf7c4061b9bdf61988ead1362afe58b9b141ecc44d4ccf7"
+  },
+  {
+    "path": "artifacts/demo/evidence.jsonl",
+    "sha256": "b67b4d2269d9be452f72411b959bd5689542d05fdd84b7b57a7bf35d834e40aa"
+  },
+  {
+    "path": "artifacts/demo/manifest.json",
+    "sha256": "97b7f2c28cd1980818680b29843adfb9055da2ab818bf7e46fc6b8d332870e96"
+  },
+  {
+    "path": "artifacts/demo/operator-key.json",
+    "sha256": "7beabc97ad5b112a468e0d38fed5011fb995a08fe79be521399d4928051f01e0"
+  },
+  {
+    "path": "artifacts/demo/receipt.json",
+    "sha256": "817c4cb23796e871762f2b2326ae1fe2f2d23ead8649adffa469ec0844854a9a"
+  },
+  {
+    "path": "artifacts/proof/ablation-benchmark.txt",
+    "sha256": "a07c0d286e0d5bdff97202b6326570c4cc347c3928dc1bf7478d798221bcfe5f"
+  },
+  {
+    "path": "artifacts/proof/auditability-gap.txt",
+    "sha256": "733168bc2455170f8451ee459d551913b3a41931b09133961d7374d445259052"
+  },
+  {
+    "path": "artifacts/proof/coverage.json",
+    "sha256": "debd59c96d94a4e72422468c701ec77131857479de0a0fc60895ea0b8387c735"
+  },
+  {
+    "path": "artifacts/proof/demo-generation.txt",
+    "sha256": "666da6a9135a68fea0f5bcf31d8fc99ce66c04526c1b65a6c4fbb343f2b81263"
+  },
+  {
+    "path": "artifacts/proof/docker-boundary-build.txt",
+    "sha256": "f88dfb3c1af544b1760144de483824e1df65b5b9be7fb9fd111cc9f429275705"
+  },
+  {
+    "path": "artifacts/proof/docker-boundary-smoke.txt",
+    "sha256": "03f2c1674cdc907b8040026b06861429a0d06b60243da0f7b768c75af408132b"
+  },
+  {
+    "path": "artifacts/proof/environment.json",
+    "sha256": "c92cb37ac467fc38ac016652c32b99a4d1ee16aeecd5fac7b65d72a2d7e8b749"
+  },
+  {
+    "path": "artifacts/proof/final-gate-summary.json",
+    "sha256": "46638b88ab1fbe995ed9e774fa4edfcdbd77bc16f8f06b8dbd4ebf6e77104d2c"
+  },
+  {
+    "path": "artifacts/proof/final-gate-summary.txt",
+    "sha256": "3a8f4864c625daeda69247e82e96b23a81cd52f0d92ab5a6d3e7c5df5637e173"
+  },
+  {
+    "path": "artifacts/proof/install.txt",
+    "sha256": "f7ef9082088ad8929d0762684db84df70375b8b179b0f233b77d58a631a4f3be"
+  },
+  {
+    "path": "artifacts/proof/judge-scenarios.txt",
+    "sha256": "5af0fd8de3b898a16a590ff4b15ca0f3af44c513417943055430a64badc35fe5"
+  },
+  {
+    "path": "artifacts/proof/junit.xml",
+    "sha256": "60f79c0f5e146e654e97759fc37b422e94dee1f0a1a001750a05ac9ac044e2af"
+  },
+  {
+    "path": "artifacts/proof/network-ablation.txt",
+    "sha256": "6db275709347f5791ec600abb8049a929dd377757d4a474e62bb9ab539f33327"
+  },
+  {
+    "path": "artifacts/proof/offline-audit.txt",
+    "sha256": "c46d14acefe4811ecaae5ec7b09fa99a2191117e70852ac3fff06a59052bf6e9"
+  },
+  {
+    "path": "artifacts/proof/pytest-coverage.txt",
+    "sha256": "b80c76affa94d032297c96904fcc78fce8992766c741b01ef213cf4675862123"
+  },
+  {
+    "path": "artifacts/proof/README.md",
+    "sha256": "b4013d0efc3c913740852638dcc3fc1dd97d0b1303ebf0b1a0c40a0e363280ca"
+  },
+  {
+    "path": "artifacts/scenarios/results.json",
+    "sha256": "f3e37ec94b09c5c39a1bc77820a9a98f353b0b74b1cff6ae3a961caff7c82d2d"
+  }
+]

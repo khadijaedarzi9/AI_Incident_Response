@@ -1,0 +1,218 @@
+{
+  "$defs": {
+    "DecisionBody": {
+      "additionalProperties": false,
+      "properties": {
+        "action_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Action Sha256",
+          "type": "string"
+        },
+        "authorization_expires_monotonic_ns": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Authorization Expires Monotonic Ns"
+        },
+        "authorization_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Authorization Id"
+        },
+        "authorization_max_uses": {
+          "anyOf": [
+            {
+              "const": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Authorization Max Uses"
+        },
+        "decided_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Decided At",
+          "type": "string"
+        },
+        "decision_monotonic_ns": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Decision Monotonic Ns",
+          "type": "integer"
+        },
+        "gateway_instance_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Gateway Instance Id",
+          "type": "string"
+        },
+        "gateway_key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Gateway Key Id",
+          "type": "string"
+        },
+        "hard_violation": {
+          "title": "Hard Violation",
+          "type": "boolean"
+        },
+        "kill_epoch": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Kill Epoch",
+          "type": "integer"
+        },
+        "manifest_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Manifest Hash",
+          "type": "string"
+        },
+        "matched_rule_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Matched Rule Id"
+        },
+        "protocol": {
+          "const": "BCP-1",
+          "default": "BCP-1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "reason_code": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "request_event_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Request Event Hash",
+          "type": "string"
+        },
+        "request_event_sequence": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Request Event Sequence",
+          "type": "integer"
+        },
+        "request_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Request Id",
+          "type": "string"
+        },
+        "run_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "verdict": {
+          "$ref": "#/$defs/Verdict"
+        }
+      },
+      "required": [
+        "run_id",
+        "manifest_hash",
+        "request_id",
+        "request_event_sequence",
+        "request_event_hash",
+        "action_sha256",
+        "gateway_key_id",
+        "gateway_instance_id",
+        "decided_at",
+        "decision_monotonic_ns",
+        "kill_epoch",
+        "verdict",
+        "reason_code",
+        "hard_violation"
+      ],
+      "title": "DecisionBody",
+      "type": "object"
+    },
+    "Ed25519Signature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519",
+          "default": "Ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key_id",
+        "value"
+      ],
+      "title": "Ed25519Signature",
+      "type": "object"
+    },
+    "Verdict": {
+      "enum": [
+        "ALLOW",
+        "DENY",
+        "KILL"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "body": {
+      "$ref": "#/$defs/DecisionBody"
+    },
+    "decision_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Decision Hash",
+      "type": "string"
+    },
+    "gateway_signature": {
+      "$ref": "#/$defs/Ed25519Signature"
+    }
+  },
+  "required": [
+    "body",
+    "decision_hash",
+    "gateway_signature"
+  ],
+  "title": "Decision",
+  "type": "object"
+}

@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "Ed25519Signature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519",
+          "default": "Ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key_id",
+        "value"
+      ],
+      "title": "Ed25519Signature",
+      "type": "object"
+    },
+    "WitnessCheckpointBody": {
+      "additionalProperties": false,
+      "description": "Evidence root signed by an independently operated witness.",
+      "properties": {
+        "event_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Event Count",
+          "type": "integer"
+        },
+        "evidence_file_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Evidence File Sha256",
+          "type": "string"
+        },
+        "final_event_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Final Event Hash"
+        },
+        "manifest_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Manifest Hash",
+          "type": "string"
+        },
+        "protocol": {
+          "const": "BCP-1",
+          "default": "BCP-1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "run_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "witness_key_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Witness Key Id",
+          "type": "string"
+        },
+        "witnessed_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Witnessed At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "manifest_hash",
+        "witness_key_id",
+        "witnessed_at",
+        "event_count",
+        "final_event_hash",
+        "evidence_file_sha256"
+      ],
+      "title": "WitnessCheckpointBody",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "body": {
+      "$ref": "#/$defs/WitnessCheckpointBody"
+    },
+    "checkpoint_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Checkpoint Hash",
+      "type": "string"
+    },
+    "witness_signature": {
+      "$ref": "#/$defs/Ed25519Signature"
+    }
+  },
+  "required": [
+    "body",
+    "checkpoint_hash",
+    "witness_signature"
+  ],
+  "title": "WitnessCheckpoint",
+  "type": "object"
+}

@@ -1,0 +1,129 @@
+{
+  "$defs": {
+    "EventBody": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/EventKind"
+        },
+        "manifest_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Manifest Hash",
+          "type": "string"
+        },
+        "monotonic_ns": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Monotonic Ns",
+          "type": "integer"
+        },
+        "observed_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "payload_canonical_json": {
+          "title": "Payload Canonical Json",
+          "type": "string"
+        },
+        "payload_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Payload Sha256",
+          "type": "string"
+        },
+        "previous_event_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Previous Event Hash",
+          "type": "string"
+        },
+        "producer_instance_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Producer Instance Id",
+          "type": "string"
+        },
+        "protocol": {
+          "const": "BCP-1",
+          "default": "BCP-1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "request_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Request Id"
+        },
+        "run_id": {
+          "pattern": "^[a-z0-9](?:[a-z0-9._:-]{0,127})$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sequence": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "run_id",
+        "manifest_hash",
+        "sequence",
+        "previous_event_hash",
+        "kind",
+        "producer_instance_id",
+        "observed_at",
+        "monotonic_ns",
+        "payload_canonical_json",
+        "payload_sha256"
+      ],
+      "title": "EventBody",
+      "type": "object"
+    },
+    "EventKind": {
+      "enum": [
+        "REQUEST",
+        "DECISION",
+        "DISPATCH",
+        "RESULT",
+        "CANCELLATION",
+        "VIOLATION",
+        "KILL_REQUESTED",
+        "KILL_ACKNOWLEDGED",
+        "OVERLOAD_SUMMARY"
+      ],
+      "title": "EventKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "body": {
+      "$ref": "#/$defs/EventBody"
+    },
+    "event_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Event Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "body",
+    "event_hash"
+  ],
+  "title": "Event",
+  "type": "object"
+}
